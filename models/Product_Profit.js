@@ -1,10 +1,10 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Product extends Model {}
+class Product_Profit extends Model {}
 
 // create fields/columns for Post model
-Product.init(
+Product_Profit.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -12,39 +12,41 @@ Product.init(
         primaryKey: true,
         autoIncrement: true
       },
-      product_name: {
-        type: DataTypes.STRING,
+      num_sold: {
+        type: DataTypes.INTEGER,
         allowNull: false
       },
-      price: {
+      cost: {
         type: DataTypes.NUMBER,
         allowNull: false
         // validate: {
         //   isURL: true
         // }
       },
-      stock: {
+      // stock: {
+      //   type: DataTypes.INTEGER,
+      //   allowNull: false
+      //   // references: {
+      //   //   model: 'user',
+      //   //   key: 'id'
+      //   // }
+      // },    
+      
+      product_id: {
         type: DataTypes.INTEGER,
-        allowNull: false
-        // references: {
-        //   model: 'user',
-        //   key: 'id'
-        // }
-      },         
-      category_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'category',
-        key: 'id'
+        references: {
+          model: 'product',
+          key: 'id'
+        }
       }
-    }
+
     },
     {
       sequelize,
       freezeTableName: true,
       underscored: true,
-      modelName: 'product'
+      modelName: 'product_profit'
     }
   );
 
-  module.exports = Product;
+  module.exports = Product_Profit;

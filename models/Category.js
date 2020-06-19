@@ -15,7 +15,7 @@ Category.init(
       category_name: {
         type: DataTypes.STRING,
         allowNull: false
-      },
+      }
     //   price: {
     //     type: DataTypes.NUMBER,
     //     allowNull: false
@@ -23,13 +23,13 @@ Category.init(
     //     //   isURL: true
     //     // }
     //   },
-      product_id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'product',
-          key: 'id'
-        }
-      }
+      // product_id: {
+      //   type: DataTypes.INTEGER,
+      //   references: {
+      //     model: 'product',
+      //     key: 'id'
+      //   }
+      // }
     },
     {
       sequelize,
@@ -38,3 +38,5 @@ Category.init(
       modelName: 'category'
     }
   );
+
+  module.exports = Category;
