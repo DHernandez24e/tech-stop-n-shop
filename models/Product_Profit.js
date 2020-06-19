@@ -17,21 +17,12 @@ Product_Profit.init(
         allowNull: false
       },
       cost: {
-        type: DataTypes.NUMBER,
-        allowNull: false
-        // validate: {
-        //   isURL: true
-        // }
-      },
-      // stock: {
-      //   type: DataTypes.INTEGER,
-      //   allowNull: false
-      //   // references: {
-      //   //   model: 'user',
-      //   //   key: 'id'
-      //   // }
-      // },    
-      
+        type: DataTypes.DECIMAL,
+        allowNull: false,
+        validate: {
+          isDecimal: true
+        }
+      },   
       product_id: {
         type: DataTypes.INTEGER,
         references: {
