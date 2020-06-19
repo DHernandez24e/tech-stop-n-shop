@@ -17,7 +17,7 @@ Product_Profit.init(
         allowNull: false
       },
       cost: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.DECIMAL,
         allowNull: false
         // validate: {
         //   isURL: true

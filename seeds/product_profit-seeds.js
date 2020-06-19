@@ -28,6 +28,6 @@ const product_profit_Data = [
   
 ];
 
-const seed_Product_Profit = () => Tag.bulkCreate(product_profit_Data);
+const seed_Product_Profit = () => Product_Profit.bulkCreate(product_profit_Data);
 
 module.exports = seed_Product_Profit;
