@@ -20,7 +20,7 @@ const sequelize = require('./config/connection');
 // };
 
 const app = express();
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -31,6 +31,6 @@ app.use(express.urlencoded({ extended: true }));
 // app.engine('handlebars', hbs.engine);
 // app.set('view engine', 'handlebars');
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: true }).then(() => {
     app.listen(PORT, () => console.log(`Now Listening to PORT ${PORT}`));
 });
