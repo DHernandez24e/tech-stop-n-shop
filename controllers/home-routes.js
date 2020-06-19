@@ -11,6 +11,11 @@ router.get('/', (req, res) => {
     res.render('homepage', {});
   }); 
 
+  router.get('/profit', (req, res) => {
+    console.log(req.session);
+    res.render('profit', {});
+  }); 
+
 // router.get('/', (req, res) => {
 //     Post.findAll({
 //             attributes: [
