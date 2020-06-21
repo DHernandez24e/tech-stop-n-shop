@@ -19,18 +19,18 @@ Product.belongsToMany(User, {
 });
 
 Product.belongsTo(Category, {
-    foreignKey: 'product_id'
+    foreignKey: 'category_id'
   });
 
 Category.hasMany(Product, {
-    foreignKey: 'product_id'
+    foreignKey: 'category_id'
   });
 
 Product_Profit.belongsTo(Product, {
     foreignKey: 'product_id'
   });
 
-Product.belongsTo(Product_Profit, {
+Product.hasMany(Product_Profit, {
     foreignKey: 'product_id'
   });
 

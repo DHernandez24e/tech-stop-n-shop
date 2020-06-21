@@ -1,49 +1,79 @@
 const router = require('express').Router();
-// const { Comment } = require('../../models');
-const { Product, User, Product_Profit, Category } = require('../../models');
+const { Product, Category } = require('../../models');
 
-
+//GET all products
 router.get('/', (req, res) => {
-    console.log('======================');
     Product.findAll({
-      order: [['created_at', 'DESC']],
-      attributes: [
-        'id',
-        'product_name',
-        'price',
-        'stock',
-        'category_id'
-      //   [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
-      ],
-      include: [
-        // include the Comment model here:
-        {
-          model: Category,
-          attributes: ['id', 'category_name']
-  
-        },
-        {
-          model: Product_Profit,
-          attributes: ['id', 'num_sold', 'cost', 'product_id']
+        attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
+        include: {
+            model: Category,
+            attributes: ['id', 'category_name']
         }
-      ]
-     })
-     .then(dbPostData => {
-      // pass a single post object into the homepage template
-      console.log(dbPostData[0]);
-      res.json(dbPostData)
-    //   const posts = dbPostData.map(post => post.get({ plain: true }));
-    //   res.render('homepage', dbPostData[0].get({ plain: true }));
-      // res.render('profit', {
-      //   posts
-      //   loggedIn: req.session.loggedIn
-      // });
     })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    })
-  
-  });
+    .then(dbProductData => res.json(dbProductData))
+    .catch(err => res.status(500).json(err));
+});
 
-  module.exports = router;
+//GET single product
+router.get('/:id', (req, res) => {
+    Product.findOne({
+        where: {
+            id: req.params.id
+        },
+        attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
+        include: {
+            model: Category,
+            attributes: ['id', 'category_name']
+        }
+    })
+    .then(dbProductData => {
+        if (!dbProductData) {
+            res.status(400).json({ message: 'No product found with this id' });
+            return
+        }
+        res.json(dbProductData)
+    })
+    .catch(err => res.status(500).json(err));
+});
+
+//POST new product
+router.post('/', (req, res) => {
+    Product.create({
+        product_name: req.body.product_name,
+        price: req.body.price,
+        stock: req.body.price,
+        category_id: req.body.category_id
+    })
+    .then(dbProductData => res.json(dbProductData))
+    .catch(err => res.status(500).json(err));
+});
+
+//PUT update product
+router.put('/:id', (req, res) => {
+    Product.update(req.body,{
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(dbProductData => req.json(dbProductData))
+    .catch(err => res.status(500).json(err));
+});
+
+//DELETE product
+router.delete('/:id', (req, res) => {
+    Product.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(dbProductData => {
+        if (!dbProductData) {
+            res.status(400).json({ message: 'No product found with this id' });
+            return;
+        }
+        res.json(dbProductData)
+    })
+    .catch(err => res.status(500).json(err));
+});
+
+module.exports = router

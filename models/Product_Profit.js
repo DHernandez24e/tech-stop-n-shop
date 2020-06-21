@@ -18,11 +18,11 @@ Product_Profit.init(
       },
       cost: {
         type: DataTypes.DECIMAL,
-        allowNull: false
-
-      },
-   
-      
+        allowNull: false,
+        validate: {
+          isDecimal: true
+        }
+      },   
       product_id: {
         type: DataTypes.INTEGER,
         references: {

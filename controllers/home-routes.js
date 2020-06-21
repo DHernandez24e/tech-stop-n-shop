@@ -46,10 +46,10 @@ router.get('/profit', (req, res) => {
       // pass a single post object into the homepage template
       console.log(dbPostData[0]);
     //   res.json(dbPostData)
-    //   const posts = dbPostData.map(post => post.get({ plain: true }));
+      const posts = dbPostData.map(post => post.get({ plain: true }));
     //   res.render('homepage', dbPostData[0].get({ plain: true }));
       res.render('profit', {
-      //   posts
+        posts
       //   loggedIn: req.session.loggedIn
       });
     })
