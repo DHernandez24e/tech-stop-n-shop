@@ -8,28 +8,11 @@
       <div class="nav-item active">
         <h3 class="nav-link text-center">Category Income = (Items Sold)*(Item Price)</h3>
       </div>     
-      <div class="nav-item active">
-        <h3 class="nav-link text-center row top-text border-bottom" >Total Profit = (Sum of Income in All Categories) - (Sum of Debt in All Categories) =-$2951</h3>
+      <div class="nav-item active row">
+        <h3 class="nav-link text-center row top-text border-bottom col-md-10" >Total Profit ($) = (Sum of Income in All Categories) - (Sum of Debt in All Categories) = </h3>
+      {{#if profitFlag}}
+        <h3 class="col-md-2 text-success">{{profitTotal}}</h3>
+        {{else}}
+      <h3 class="col-md-2 text-danger">{{profitTotal}}</h3>
+      {{/if}}
       </div> 
-      <div class="container">
-      <div class="row">
-      <div class="nav-item active  col-sm">
-        <h3 class=" text-left font-weight-bold font-italic" >Category</h3>
-      </div>
-      <div class="nav-item active col-sm">
-        <h3 class=" text-center font-weight-bold font-italic" ># Items Sold</h3>
-      </div>
-      <div class="nav-item active col-sm">
-        <h3 class="text-right font-weight-bold font-italic" ># Items In Inventory</h3>
-      </div>
-      </div>
-      </div>   
-      <div class="nav-item active col-sm">
-        <h3 class="text-right font-weight-bold font-italic" >{{posts}}</h3>
-      </div>  
-  {{#each posts as |post|}}
-  <li>
-    {{> post-info post }}
-  </li>
-  {{/each}}                    
-    </div>
