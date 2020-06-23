@@ -29,6 +29,17 @@ Product.init(
                 isNumeric: true
             }
         },
+        image: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            validate: {
+                isUrl: true
+            }
+        },
+        featured: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
+        },
         category_id: {
             type: DataTypes.INTEGER,
             references: {
