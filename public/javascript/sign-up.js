@@ -24,7 +24,7 @@ async function editFormHandler(event) {
         }
       });
       console.log(" I am here")
-    //   document.location.replace('/');
+      document.location.replace('/');
   }
   
   document.querySelector('#submitButton').addEventListener('click', editFormHandler);
