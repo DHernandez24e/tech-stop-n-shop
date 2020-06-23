@@ -3,14 +3,14 @@
   <br />
   <div class="container">
     <div class="row">
-      {{#each products as |post|}}
+      {{#each products}}
       {{!-- {{> post-info post }} --}}
       <div class="col">
         <div class="card mr-md-5">
           <div class="card-body ">
             <p class="card-text"><h5 class="text-center">{{product_name}}</h5></p>
           </div>
-          <img src="/images/pathToYourImage.png" alt="Card image">
+          <img src="{{image}}" alt="Card image">
           <div class="card-body">
             <p class="card-text text-center">${{price}}</p>
           </div>
@@ -24,4 +24,4 @@
 </ol>
 
 
-{{!-- <script src="/javascript/homepage.js"></script> --}}
+<script src="/javascript/homepage.js"></script>

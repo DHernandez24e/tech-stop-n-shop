@@ -6,6 +6,7 @@ const productData = [
     price: 398.0,
     stock: 5,
     category_id: 3,
+    image: 'https://images-na.ssl-images-amazon.com/images/I/81%2Bh9mpyQmL._AC_SX522_.jpg',
     featured: true
   },
   {
@@ -13,6 +14,7 @@ const productData = [
     price: 280.0,
     stock: 7,
     category_id: 1,
+    image: 'https://www.magnavox.com/1208-home_default/65mv379rf7.jpg',
     featured: true
   },
   {
