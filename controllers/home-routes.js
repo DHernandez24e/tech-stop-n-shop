@@ -98,7 +98,13 @@ router.get('/profit', (req, res) => {
     // console.log("online 34", JSON.stringify(dbPostData));
     // const hi = new dbPostData[0].product
     // console.log(hi);
-    res.render('profit', {parsePost, profitTotal, profitFlag, test2});
+    let loginStatus;
+    if (typeof req.session.passport != 'undefined') {
+        loginStatus = req.session.passport.user.id;
+    } else {
+        loginStatus = false;
+    }
+    res.render('profit', {parsePost, profitTotal, profitFlag, test2, loggedIn: loginStatus});
     // const posts = "hello";
     // res.render('profit', {posts: "hello"});
   })
@@ -122,7 +128,13 @@ router.get('/product-inventory', (req, res) => {
     })
   .then(dbPostData => {
     let parsePost =JSON.parse(JSON.stringify(dbPostData));
-    res.render('product-inventory', {parsePost});
+    let loginStatus;
+    if (typeof req.session.passport != 'undefined') {
+        loginStatus = req.session.passport.user.id;
+    } else {
+        loginStatus = false;
+    }
+    res.render('product-inventory', {parsePost,  loggedIn: loginStatus});
     // const posts = "hello";
     // res.render('profit', {posts: "hello"});
   })
@@ -140,7 +152,13 @@ router.get('/products-update/:id', (req, res) => {
             //   res.status(404).json({ message: 'No user found with this id' });
             //   return;
             // }
-            res.render("products-update");
+            let loginStatus;
+            if (typeof req.session.passport != 'undefined') {
+                loginStatus = req.session.passport.user.id;
+            } else {
+                loginStatus = false;
+            }
+            res.render("products-update",{  loggedIn: loginStatus});
           })
           .catch(err => {
             console.log(err);
