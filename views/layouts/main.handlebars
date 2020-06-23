@@ -31,14 +31,14 @@
         <a class="nav-link" href="#">Products</a>
       </li>
       {{#if loggedIn}}
-            <li class="nav-item active">
-              <a class="nav-link" href="/logout" id="logout">Logout</a>
-            </li>
-            {{else}}
-            <li class="nav-item active">
-              <a class="nav-link" href="/login" id="login">Login</a>
-            </li>
-            {{/if}}
+        <li class="nav-item active">
+          <button id="logout" class="btn">Logout</button>
+        </li>
+      {{else}}
+        <li class="nav-item active">
+          <a class="nav-link" href="/login" id="login">Login</a>
+        </li>
+      {{/if}}
     </ul>
     <form class="form-inline my-2 my-lg-0 m-auto">
       <input class="form-control mr-sm-2" type="text" placeholder="Search By Keyword" aria-label="Search" style="width: 500px;">
@@ -83,7 +83,7 @@
     </footer>
   </div>
   {{#if loggedIn}}
-  {{!-- <script src="/javascript/logout.js"></script> --}}
+  <script src="/javascript/logout.js"></script>
   <script src="/javascript/homepage.js"></script>
   {{/if}}
 </body>

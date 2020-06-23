@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 class User extends Model {
     checkPassword(loginPw) {
-        return bcrypt.compareSync(loginPw, this.password)
+        return bcrypt.compare(loginPw, this.password)
     }
 }
 
@@ -33,6 +33,10 @@ User.init(
             validate: {
                 len: [4]
             }
+        },
+        dark_mode: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
         }
     },
     {
