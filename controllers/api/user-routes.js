@@ -11,6 +11,13 @@ router.get('/', (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
+router.get('/logout', (req, res) => {
+    console.log('REQ SESSION', req.session);
+    req.session.destroy((err) => {
+        res.redirect('/');
+    })
+});
+
 //GET single user
 router.get('/:id', (req, res) => {
     User.findOne({
@@ -35,12 +42,6 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
       loggedIn: req.session.passport.user.id,
     });
   });
-  
-router.get('/logout', (req, res) => {
-req.session.destroy((err) => {
-    res.redirect('/');
-})
-});
 
 //POST create new user
 router.post('/', (req, res) => {
