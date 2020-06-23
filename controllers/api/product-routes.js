@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const { Product, Category } = require('../../models');
+const { Product, Category, Product_Profit } = require('../../models');
 
 //GET all products
 router.get('/', (req, res) => {
     Product.findAll({
-        attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
+        attributes: ['id', 'product_name', 'price', 'stock', 'image', 'category_id'],
         include: 
         [
         {
@@ -29,7 +29,7 @@ router.get('/:id', (req, res) => {
         {
             id: req.params.id
         },
-        attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
+        attributes: ['id', 'product_name', 'price', 'stock', 'image', 'category_id'],
         include: 
         [
         {
