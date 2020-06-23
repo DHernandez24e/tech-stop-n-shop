@@ -1,9 +1,27 @@
 <ol class="post-list">
-  {{#each posts as |post|}}
-  <li>
-    {{> post-info post }}
-  </li>
-  {{/each}}
+  <h1>Trending Products:</h1>
+  <br />
+  <div class="container">
+    <div class="row">
+      {{#each products as |post|}}
+      {{!-- {{> post-info post }} --}}
+      <div class="col">
+        <div class="card mr-md-5">
+          <div class="card-body ">
+            <p class="card-text"><h5 class="text-center">{{product_name}}</h5></p>
+          </div>
+          <img src="/images/pathToYourImage.png" alt="Card image">
+          <div class="card-body">
+            <p class="card-text text-center">${{price}}</p>
+          </div>
+          <a href="#" data-name="{{product_name}}" data-price="{{price}}" class="add-to-cart btn btn-primary">Add to cart</a>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+
 </ol>
 
-<!-- all we need is the > character, followed by the name of the partial file and the object we'll pass to the partial. -->
+
+{{!-- <script src="/javascript/homepage.js"></script> --}}

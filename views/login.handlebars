@@ -1,33 +1,16 @@
-<form class="login-form">
-  <div>
-    <label for="email-login">email:</label>
-    <input type="text" id="email-login" />
+<form>
+  <div class="form-group">
+    <label for="formGroupExampleInput">Username</label>
+    <input type="text" class="form-control" id="username-login" placeholder="Please Your A Username">
   </div>
-  <div>
-    <label for="password-login">password:</label>
-    <input type="password" id="password-login" />
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Password</label>
+    <input type="password" class="form-control" id="password-login" placeholder="Please Your A Password">
   </div>
-  <div>
-    <button type="submit">login</button>
-  </div>
-</form>
-
-<form class="signup-form">
-  <div>
-    <label for="username-signup">username:</label>
-    <input type="text" id="username-signup" />
-  </div>
-  <div>
-    <label for="email-signup">email:</label>
-    <input type="text" id="email-signup" />
-  </div>
-  <div>
-    <label for="password-signup">password:</label>
-    <input type="password" id="password-signup" />
-  </div>
-  <div>
-    <button type="submit">signup</button>
-  </div>
+  <button type="submit" id="submitButton" class="btn btn-primary mb-2">Submit</button>
+  </br>
+  </br>
+  <a href="./signup">Click Here To Signup!</a>
 </form>
 
 <script src="/javascript/login.js"></script>
