@@ -1,0 +1,40 @@
+{{!-- <div class="comments">
+  {{#each post.comments}}
+  <section class="comment">
+    <div class="meta">
+      {{user.username}} on {{created_at}}
+    </div>
+    <div class="text">
+      {{comment_text}}
+    </div>
+  </section>
+  {{/each}}
+</div> --}}\
+
+
+{{!-- <div class="comments">
+  {{#each this}}
+  <section class="comment">
+    <div class="meta">
+      {{user.username}} on {{created_at}}
+    </div>
+    <div class="text">
+      {{comment_text}}
+    </div>
+  </section>
+  {{/each}}
+</div> --}}
+
+
+  {{#each this}}
+
+     {{!-- {{product_name}} on {{stock}} on {{product_profits.num_sold}}
+     {{> numsold product_profits}} --}}
+      <div class="nav-item active col-3 col-sm">
+        <h3 class="text-right font-weight-bold font-italic" >{{product_name}}</h3>
+      </div>
+      <div class="nav-item active col-3 col-sm">
+        <h3 class="text-right font-weight-bold font-italic" >{{stock}}</h3>
+      </div>      
+      {{> numsold product_profits}}
+  {{/each}}
