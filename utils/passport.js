@@ -10,7 +10,11 @@ passport.use(new LocalStrategy(
         username: username
       }
     });
-    let result = await dbUser.checkPassword(password);
+
+    let result;
+    if (dbUser != null) {
+      result = await dbUser.checkPassword(password);
+    }
 
     if (!dbUser) {
       console.log('Incorrect username');
