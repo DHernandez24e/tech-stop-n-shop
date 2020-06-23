@@ -6,11 +6,6 @@ const {
     Comment
 } = require('../models');
 
-// router.get('/', (req, res) => {
-//     console.log(req.session);
-//     res.render('homepage', {});
-//   }); 
-
 router.get('/', (req, res) => {
     Product.findAll({
         where: {
@@ -43,9 +38,17 @@ router.get('/', (req, res) => {
             }));
             // pass a single post object into the homepage template
             //res.render('homepage', { posts });
+            
+            let loginStatus;
+            if (typeof req.session.passport != 'undefined') {
+                loginStatus = req.session.passport.user.id;
+            } else {
+                loginStatus = false;
+            }
+
             res.render('homepage', {
-                products
-                ,loggedIn: req.session.loggedIn
+                products,
+                loggedIn: loginStatus
             });
         })
         .catch(err => {
@@ -59,7 +62,6 @@ router.get('/login', (req, res) => {
         res.redirect('/');
         return;
     }
-
     res.render('login');
 });
 

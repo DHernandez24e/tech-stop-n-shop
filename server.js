@@ -1,36 +1,50 @@
 const express = require('express');
-const routes = require('./controllers')
 const sequelize = require('./config/connection');
-const path = require('path');
-const exphbs = require('express-handlebars');
-// const helpers = require('./utils/helpers');
-const hbs = exphbs.create({ });
 const session = require('express-session');
-
+const exphbs = require('express-handlebars');
+const routes = require('./controllers');
+const passport = require('./utils/passport');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-const sess = {
-    secret: 'N/A',
-    cookie: {},
-    resave: false,
-    saveUninitialized: true,
-    store: new SequelizeStore({
-        db: sequelize
-    })
-};
+require('dotenv').config();
+
+const path = require('path');
+const hbs = exphbs.create({});
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
+
+let cookieVar;
+if(process.env.JAWSDB_URL) {
+  cookieVar = process.env.JAWSDB_COOKIE;
+} else {
+  cookieVar = process.env.DB_COOKIE;
+}
+
+const sess = {
+  secret: cookieVar,
+  cookie: {
+    maxAge: (1000 * 60 * 60)
+  },
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
+  })
+};
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session(sess));
-app.use(routes);
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
+app.use(routes);
+
 sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () => console.log(`Now Listening to PORT ${PORT}`));
+  app.listen(PORT, () => console.log(`Now listening on port ${PORT}!`));
 });
