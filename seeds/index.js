@@ -15,7 +15,7 @@ const seedAll = async () => {
   console.log('\n----- PRODUCTS SEEDED -----\n');
 
   await seed_Product_Profit();
-  console.log('\n----- TAGS SEEDED -----\n');
+  console.log('\n----- PRODUCT PROFIT SEEDED -----\n');
 
 
 

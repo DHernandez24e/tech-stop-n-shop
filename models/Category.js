@@ -16,20 +16,6 @@ Category.init(
         type: DataTypes.STRING,
         allowNull: false
       }
-    //   price: {
-    //     type: DataTypes.NUMBER,
-    //     allowNull: false
-    //     // validate: {
-    //     //   isURL: true
-    //     // }
-    //   },
-      // product_id: {
-      //   type: DataTypes.INTEGER,
-      //   references: {
-      //     model: 'product',
-      //     key: 'id'
-      //   }
-      // }
     },
     {
       sequelize,
