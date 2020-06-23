@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const passport = require('../../utils/passport');
 
 // GET all users
 router.get('/', (req, res) => {
@@ -8,6 +9,12 @@ router.get('/', (req, res) => {
     })
     .then(dbUserData => res.json(dbUserData))
     .catch(err => res.status(500).json(err));
+});
+
+router.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        res.redirect('/');
+    })
 });
 
 //GET single user
@@ -28,12 +35,20 @@ router.get('/:id', (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
+router.post('/login', passport.authenticate('local'), function(req, res) {
+    console.log('PASSPORT GOES HERE', req.session.passport);
+    res.render('homepage', {
+      loggedIn: req.session.passport.user.id,
+    });
+  });
+
 //POST create new user
 router.post('/', (req, res) => {
     User.create({
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        dark_mode: false
     })
     .then(dbUserData => res.json(dbUserData))
     .catch(err => res.status(500).json(err));

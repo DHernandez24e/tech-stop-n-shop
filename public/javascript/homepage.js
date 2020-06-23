@@ -206,3 +206,4 @@ var shoppingCart = (function() {
   });
   
   displayCart();
+  
