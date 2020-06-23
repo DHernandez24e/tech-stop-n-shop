@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 const passport = require('../../utils/passport');
+const isAuth = require('../../utils/middleware/isAuth');
 
 // GET all users
 router.get('/', (req, res) => {
@@ -36,7 +37,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
-    console.log('PASSPORT GOES HERE', req.session.passport);
+    console.log('PASSPORT GOES HERE', req);
     res.render('homepage', {
       loggedIn: req.session.passport.user.id,
     });
@@ -52,6 +53,30 @@ router.post('/', (req, res) => {
     })
     .then(dbUserData => res.json(dbUserData))
     .catch(err => res.status(500).json(err));
+    });
+
+router.put('/dm', (req, res) => {
+    if (typeof req.session.passport != 'undefined') {
+        User.update({
+            dark_mode: req.body.dark_mode
+        }, 
+        {
+            where: {
+                id: req.session.passport.user.id
+            }
+        })
+        .then(dbUserData => {
+            if (!dbUserData[0]) {
+                res.status(404).json({ message: 'No user found with this id' });
+                return;
+            }
+            console.log(`Successfully updated user table for ${req.session.passport.user.username} and dark mode is ${req.body.dark_mode}`)
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+    }
 });
 
 //PUT update user
