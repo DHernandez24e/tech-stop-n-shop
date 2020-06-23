@@ -5,7 +5,7 @@ const exphbs = require('express-handlebars');
 const routes = require('./controllers');
 const passport = require('./utils/passport');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-var cookieParser = require('cookie-parser');
+
 
 require('dotenv').config();
 
@@ -14,7 +14,7 @@ const hbs = exphbs.create({});
 
 const app = express();
 const PORT = process.env.PORT || 3002;
-app.use(cookieParser())
+
 
 let cookieVar;
 if(process.env.JAWSDB_URL) {
