@@ -10,7 +10,8 @@
           <div class="card-body ">
             <p class="card-text"><h5 class="text-center">{{product_name}}</h5></p>
           </div>
-          <img src='{{image}}' alt="Card image">
+          <div class="card-body" style="background-image: url({{image}})"></div>
+          {{!-- <img src={{image}} alt="Card image"> --}}
           <div class="card-body">
             <p class="card-text text-center">${{price}}</p>
           </div>
