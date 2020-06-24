@@ -207,3 +207,10 @@ var shoppingCart = (function() {
   
   displayCart();
   
+async function checkout() {
+  if (sessionStorage.shoppingCart != null) {
+    document.location.replace('/checkout');
+  }
+}
+
+document.querySelector('#checkout').addEventListener('click', checkout);
