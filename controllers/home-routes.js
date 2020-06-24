@@ -175,7 +175,8 @@ router.get('/', (req, res) => {
                 'id',
                 'product_name',
                 'price',
-                'stock'
+                'stock',
+                'image'
             ],
             // include: [
             //     /*{
