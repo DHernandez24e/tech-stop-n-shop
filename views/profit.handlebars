@@ -9,10 +9,12 @@
         <h3 class="nav-link text-center">Category Income = (Items Sold)*(Item Price)</h3>
       </div>     
       <div class="nav-item active row">
-        <h3 class="nav-link text-center row top-text border-bottom col-md-10" >Total Profit ($) = (Sum of Income in All Categories) - (Sum of Debt in All Categories) = </h3>
-      {{#if profitFlag}}
-        <h3 class="col-md-2 text-success">{{profitTotal}}</h3>
-        {{else}}
-      <h3 class="col-md-2 text-danger">{{profitTotal}}</h3>
-      {{/if}}
+        <h3 class="nav-link text-center row top-text border-bottom col-md-12" >Total Profit ($) = (Sum of Income in All Categories) - (Sum of Debt in All Categories) = 
+          {{#if profitFlag}}
+          <span class="col-md-2 text-success">{{profitTotal}}</span>
+          {{else}}
+        <span class="col-md-2 text-danger">{{profitTotal}}</span>
+        {{/if}}
+      </h3>
+      
       </div> 
