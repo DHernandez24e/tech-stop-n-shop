@@ -26,3 +26,13 @@
 [data-theme="dark"] .nav-text {
   color: white !important;
 }
+
+[data-theme="dark"] .oi-menu {
+  color: white !important;
+}
+
+@media only screen and (max-width: 991px) {
+  #logout {
+    padding-left: 0px;
+  }
+}
