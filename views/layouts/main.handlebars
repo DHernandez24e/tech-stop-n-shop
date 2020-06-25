@@ -80,6 +80,11 @@
         </div>
       </div> 
 
+    {{!-- loading these before body since some views have separate functions that require jquery --}}
+    <script src="/javascript/jquery-3.5.1.slim.min.js"></script>
+    <script src="/javascript/popper.min.js"></script>
+    <script src="/javascript/bootstrap.min.js"></script>
+
     {{{ body }}}
     
     </main>
@@ -89,9 +94,6 @@
     </div>
 
     {{!-- scripts --}}
-    <script src="/javascript/jquery-3.5.1.slim.min.js"></script>
-    <script src="/javascript/popper.min.js"></script>
-    <script src="/javascript/bootstrap.min.js"></script>
     {{#if loggedIn}}
     <script src="/javascript/logout.js"></script>
     {{/if}}

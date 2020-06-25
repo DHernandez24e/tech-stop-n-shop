@@ -6,9 +6,10 @@ const {
     Category,
     Product_Profit
 } = require('../models');
+const isAuth = require('../utils/middleware/isAuth');
 
 //GET all products
-router.get('/profit', (req, res) => {
+router.get('/profit', isAuth, (req, res) => {
     Category.findAll({
         attributes: ['id', 'category_name'],
         include: 
@@ -115,7 +116,7 @@ router.get('/profit', (req, res) => {
   .catch(err => res.status(500).json(err));
 });
 
-router.get('/product-inventory', (req, res) => {
+router.get('/product-inventory', isAuth, (req, res) => {
     Product.findAll({
         attributes: ['id', 'product_name'],
         // include: 
@@ -211,6 +212,9 @@ router.get('/', (req, res) => {
                 loginStatus = false;
             }
 
+            console.log(req.session);
+            console.log('LOG IN STATUS', loginStatus);
+
             res.render('homepage', {
                 products,
                 loggedIn: loginStatus
@@ -222,9 +226,10 @@ router.get('/', (req, res) => {
         });
 });
 
-router.get('/update-inventory', (req, res) => {
-    res.render('update-inventory')
-   })
+// don't believe this is used
+// router.get('/update-inventory', isAuth, (req, res) => {
+//     res.render('update-inventory')
+//    })
 
 router.get('/checkout', (req, res) => {
     res.render('checkout');
