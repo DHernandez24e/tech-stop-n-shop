@@ -1,14 +1,16 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="d-flex justify-content-around col-xs-6 col-lg-6 col-md-6">
-{{#each products}}
-<div class="mt-2 text-center">
-    <img src="{{image}}" alt="Card image" class="prodImg"> <br />
-    <h5>{{this.product_name}}</h5>
-    ${{this.price}}<br>
-    <a href="#" data-name="{{product_name}}" data-price="{{price}}" class="add-to-cart btn btn-primary">Add to cart</a>
-</div>
-{{/each}}
-</div>
+    <div class="col-xs-6 col-lg-10 col-md-10">
+        <div class="row mx-auto">
+            <div class="d-flex flex-wrap justify-content-around">
+                {{#each products}}
+                <div class="p-2 bg-white mt-2 text-center">
+                    <img src="{{image}}" alt="Card image" class="prodImg"> <br />
+                    <h5>{{this.product_name}}</h5>
+                    ${{this.price}}<br>
+                    <a href="#" data-name="{{product_name}}" data-price="{{price}}" class="add-to-cart btn btn-primary">Add to cart</a>
+                </div>
+                {{/each}}
+            </div>
+        </div>
     </div>
 </div>

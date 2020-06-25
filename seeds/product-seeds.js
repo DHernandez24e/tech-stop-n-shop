@@ -1,4 +1,5 @@
 const { Product } = require('../models');
+const { SamPhone, MagTv, LenLap, iPhone, HpLap, Proj, VizTv, MacLap, SatPhone, ToshLap } = require('./imageUrls');
 
 const productData = [
   {
@@ -6,7 +7,7 @@ const productData = [
     price: 398.0,
     stock: 5,
     category_id: 3,
-    image: 'https://images-na.ssl-images-amazon.com/images/I/81%2Bh9mpyQmL._AC_SX522_.jpg',
+    image: SamPhone,
     featured: true
   },
   {
@@ -14,7 +15,7 @@ const productData = [
     price: 280.0,
     stock: 7,
     category_id: 1,
-    image: 'https://www.magnavox.com/1208-home_default/65mv379rf7.jpg',
+    image: MagTv,
     featured: true
   },
   {
@@ -22,7 +23,7 @@ const productData = [
     price: 890.00,
     stock: 3,
     category_id: 2,
-    image: 't.ly/KFFn',
+    image: LenLap,
     featured: true
   },
   {
@@ -30,7 +31,7 @@ const productData = [
     price: 589.0,
     stock: 2,
     category_id: 3,
-    image: '',
+    image: iPhone,
     featured: false
   },
   {
@@ -38,43 +39,47 @@ const productData = [
     price: 650.0,
     stock: 5,
     category_id: 2,
+    image: HpLap,
     featured: false
   },
   {
-    product_name: 'Samsung Galaxy Cell Phone',
-    price: 398.0,
-    stock: 5,
-    category_id: 3,
-    image: 'https://images-na.ssl-images-amazon.com/images/I/81%2Bh9mpyQmL._AC_SX522_.jpg',
-    featured: true
+    product_name: 'BenQ Business Projector',
+    price: 650.70,
+    stock: 6,
+    category_id: 1,
+    image: Proj,
+    featured: false
   },
   {
-    product_name: 'Magnavox Flat Screen TV',
-    price: 280.0,
+    product_name: 'Vizio LED SmartTv',
+    price: 150.70,
     stock: 7,
     category_id: 1,
-    image: 'https://www.magnavox.com/1208-home_default/65mv379rf7.jpg',
-    featured: true
-  },
-  {
-    product_name: 'Lenovo Laptop',
-    price: 890.00,
-    stock: 3,
-    category_id: 2,
-    featured: true
-  },
-  {
-    product_name: 'iPhone',
-    price: 589.0,
-    stock: 2,
-    category_id: 3,
+    image: VizTv,
     featured: false
   },
   {
-    product_name: 'HP Laptop',
-    price: 650.0,
+    product_name: 'MacBook Pro',
+    price: 1109.90,
+    stock: 3,
+    category_id: 2,
+    image: MacLap,
+    featured: true
+  },
+  {
+    product_name: 'Immarsat Satellite Phone',
+    price: 589.00,
+    stock: 6,
+    category_id: 3,
+    image: SatPhone,
+    featured: false
+  },
+  {
+    product_name: 'Toshiba Laptop',
+    price: 1260.0,
     stock: 5,
     category_id: 2,
+    image: ToshLap,
     featured: false
   },
 ];
