@@ -291,4 +291,22 @@ router.get('/post/:id', (req, res) => {
         });
 });
 
+//Products page
+router.get('/products', (req, res) => {
+    Product.findAll({
+        attributes: ['id', 'product_name', 'price', 'stock', 'image']
+    })
+    .then(dbPostData => {
+        const products = dbPostData.map(products => products.get({ plain: true }));
+
+        res.render('product-list', {
+            products
+        })
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err)
+    });
+});
+
 module.exports = router;
