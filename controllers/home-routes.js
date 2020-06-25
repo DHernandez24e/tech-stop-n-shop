@@ -226,6 +226,10 @@ router.get('/update-inventory', (req, res) => {
     res.render('update-inventory')
    })
 
+router.get('/checkout', (req, res) => {
+    res.render('checkout');
+});
+
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
         res.redirect('/');
