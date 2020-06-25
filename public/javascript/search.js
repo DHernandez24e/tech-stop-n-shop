@@ -5,18 +5,7 @@ async function searchFormHandler(event) {
   const query = document.querySelector('#search-field').value.trim();
 
   if (query) {
-    const response = await fetch(`/api/products/search/${query}`, {
-      method: 'get',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-
-    if (response.ok) {
-      document.location.replace('/');
-    } else {
-      alert(response.statusText);
-    }
+    document.location.replace(`/search/${query}`);
   }
 }
 

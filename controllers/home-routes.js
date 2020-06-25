@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
+const { Op } = require('sequelize');
+
 const {
     Product,
     User,
@@ -233,6 +235,52 @@ router.get('/', (req, res) => {
 
 router.get('/checkout', (req, res) => {
     res.render('checkout');
+});
+
+router.get('/search/:query', (req, res) => {
+    console.log("WE GET TO THE ROUTE");
+    console.log("REQUEST.PARAMS", req.params);
+    Product.findAll({
+        attributes: ['id', 'product_name', 'price', 'stock', 'image', 'category_id'],
+        where: {
+            product_name: {
+                [Op.like]: '%' + req.params.query + '%'
+            }
+        },
+        include:
+            [
+                {
+                    model: Category,
+                    attributes: ['id', 'category_name']
+                },
+                {
+                    model: Product_Profit,
+                    attributes: ['id', 'num_sold', 'cost', 'product_id']
+                }
+            ]
+    })
+        .then(dbProductData => {
+            const products = dbProductData.map(products => products.get({
+                plain: true
+            }));
+
+            let loginStatus;
+            if (typeof req.session.passport != 'undefined') {
+                loginStatus = req.session.passport.user.id;
+            } else {
+                loginStatus = false;
+            }
+
+            console.log('PRODUCTS', products);
+            console.log('===========')
+            console.log('LOGGED IN?', loginStatus);
+
+            res.render('search', {
+                products: products,
+                loggedIn: loginStatus
+            });
+        })
+        .catch(err => res.status(500).json(err));
 });
 
 router.get('/login', (req, res) => {

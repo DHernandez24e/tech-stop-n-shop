@@ -22,35 +22,6 @@ router.get('/', (req, res) => {
         .catch(err => res.status(500).json(err));
 });
 
-router.get('/search/:query', (req, res) => {
-    console.log("WE GET TO THE ROUTE");
-    console.log("REQUEST.PARAMS", req.params);
-    Product.findAll({
-        attributes: ['id', 'product_name', 'price', 'stock', 'image', 'category_id'],
-        where: {
-            product_name: {
-                [Op.like]: '%' + req.params.query + '%'
-            }
-        },
-        include:
-            [
-                {
-                    model: Category,
-                    attributes: ['id', 'category_name']
-                },
-                {
-                    model: Product_Profit,
-                    attributes: ['id', 'num_sold', 'cost', 'product_id']
-                }
-            ]
-    })
-        .then(dbProductData => {
-            console.log(dbProductData);
-            res.json(dbProductData);
-        })
-        .catch(err => res.status(500).json(err));
-});
-
 //GET single product
 router.get('/:id', (req, res) => {
     Product.findOne({
