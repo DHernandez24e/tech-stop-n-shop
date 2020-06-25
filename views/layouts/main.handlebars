@@ -7,7 +7,7 @@
     <title>Tech Stop-N-Shop</title>
     {{!-- <link rel="stylesheet" href="/stylesheets/style.css"> --}}
     <link rel="stylesheet" href="/css/dark-mode.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.0/font/css/open-iconic-bootstrap.min.css" />    
   </head>
 
@@ -17,7 +17,7 @@
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand nav-text" href="/">Tech Stop-N-Shop</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+          <span class="oi oi-menu"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -46,8 +46,8 @@
               <label class="custom-control-label" for="darkSwitch"><span class="oi oi-contrast" title="oi-contrast" aria-hidden="true"></span></label>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0 m-auto">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search By Keyword" aria-label="Search" style="width: 500px;">
+          <form class="form-inline my-2 my-lg-0 mr-2">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search By Keyword" aria-label="Search" style="width: 200px;">
             <button class="btn btn-outline-success my-2 my-sm-0 nav-text" type="submit"><span class="oi oi-magnifying-glass"></span></button>
           </form>
             <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#cart"><span class="oi oi-cart"></span> (<span class="total-count"></span>)</button></div>
@@ -74,11 +74,16 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button class="clear-cart btn btn-danger">Clear Cart</button>
-              <button type="button" class="btn btn-primary">Order now</button>
+              <button type="button" id="checkout" class="btn btn-primary">Order now</button>
             </div>
           </div>
         </div>
       </div> 
+
+    {{!-- loading these before body since some views have separate functions that require jquery --}}
+    <script src="/javascript/jquery-3.5.1.slim.min.js"></script>
+    <script src="/javascript/popper.min.js"></script>
+    <script src="/javascript/bootstrap.min.js"></script>
 
     {{{ body }}}
     
@@ -92,9 +97,6 @@
     {{#if loggedIn}}
     <script src="/javascript/logout.js"></script>
     {{/if}}
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="/javascript/homepage.js"></script>
     <script src="/javascript/dark-mode-switch.js"></script>
   </body>

@@ -1,4 +1,4 @@
-async function editFormHandler(event) {
+async function signupFormHandler(event) {
     event.preventDefault();
     // const id = window.location.toString().split('/')[
     //     window.location.toString().split('/').length - 1
@@ -12,19 +12,29 @@ async function editFormHandler(event) {
     console.log(password)
     // console.log(stock)
 
-    await fetch(`/api/users`, {
-        method: 'POST',
-        body: JSON.stringify({
-          username,
-          email,
-          password
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      console.log(" I am here")
-      document.location.replace('/');
+    if (username && password && email) {
+      const response = await fetch(`/api/users`, {
+          method: 'POST',
+          body: JSON.stringify({
+            username,
+            email,
+            password
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        // console.log(" I am here")
+        // document.location.replace('/');
+
+          // check response status
+      if (response.ok) {
+        console.log('success');
+        document.location.replace('/');
+      } else {
+        alert(response.statusText);
+      }
   }
-  
-  document.querySelector('#submitButton').addEventListener('click', editFormHandler);
+};
+
+document.querySelector('#submitButton').addEventListener('click', signupFormHandler);

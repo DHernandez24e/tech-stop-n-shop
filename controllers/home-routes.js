@@ -6,9 +6,10 @@ const {
     Category,
     Product_Profit
 } = require('../models');
+const isAuth = require('../utils/middleware/isAuth');
 
 //GET all products
-router.get('/profit', (req, res) => {
+router.get('/profit', isAuth, (req, res) => {
     Category.findAll({
         attributes: ['id', 'category_name'],
         include: 
@@ -29,17 +30,19 @@ router.get('/profit', (req, res) => {
     // console.log(dbPostData);
     let test2 = JSON.stringify(dbPostData);
     let parsePost =JSON.parse(JSON.stringify(dbPostData));
-    console.log(parsePost);
+    console.log('WE GET HERE 1');
     // let test1 = "hi";
     // let test2 = "hey";
     // console.log(parsePost[0].product_profits[0].num_sold);
     let test = parsePost[1].products[0].product_profits[0].num_sold;
+    console.log('WE GET HERE 2');
     let lengthTest = parsePost.length;
     console.log("lengthTest is :");
     console.log(test)
     var soldTimesCost = 0
     var inventTimesCost = 0
     var soldTimesPrice = 0
+    
     // for (let i = 0; i < parsePost.length; i++) {
     //     sumSold[i] = 0;
     //     sumInvent[i] = 0;
@@ -62,6 +65,7 @@ router.get('/profit', (req, res) => {
 
     }
 
+    console.log('WE GET HERE 3');
     let debtTotal = soldTimesCost + inventTimesCost
     let incomeTotal = soldTimesPrice;
     let profitTotal = incomeTotal - debtTotal;
@@ -104,6 +108,7 @@ router.get('/profit', (req, res) => {
     } else {
         loginStatus = false;
     }
+    console.log('WE GET HERE 4');
     res.render('profit', {parsePost, profitTotal, profitFlag, test2, loggedIn: loginStatus});
     // const posts = "hello";
     // res.render('profit', {posts: "hello"});
@@ -111,7 +116,7 @@ router.get('/profit', (req, res) => {
   .catch(err => res.status(500).json(err));
 });
 
-router.get('/product-inventory', (req, res) => {
+router.get('/product-inventory', isAuth, (req, res) => {
     Product.findAll({
         attributes: ['id', 'product_name'],
         // include: 
@@ -207,6 +212,9 @@ router.get('/', (req, res) => {
                 loginStatus = false;
             }
 
+            console.log(req.session);
+            console.log('LOG IN STATUS', loginStatus);
+
             res.render('homepage', {
                 products,
                 loggedIn: loginStatus
@@ -218,9 +226,14 @@ router.get('/', (req, res) => {
         });
 });
 
-router.get('/update-inventory', (req, res) => {
-    res.render('update-inventory')
-   })
+// don't believe this is used
+// router.get('/update-inventory', isAuth, (req, res) => {
+//     res.render('update-inventory')
+//    })
+
+router.get('/checkout', (req, res) => {
+    res.render('checkout');
+});
 
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
