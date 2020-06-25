@@ -8,7 +8,7 @@ const {
 } = require('../models');
 const isAuth = require('../utils/middleware/isAuth');
 
-//GET all products
+//Profit page
 router.get('/profit', isAuth, (req, res) => {
     Category.findAll({
         attributes: ['id', 'category_name'],
@@ -37,7 +37,7 @@ router.get('/profit', isAuth, (req, res) => {
     let test = parsePost[1].products[0].product_profits[0].num_sold;
     console.log('WE GET HERE 2');
     let lengthTest = parsePost.length;
-    console.log("lengthTest is :");
+    console.log(`lengthTest is : ${lengthTest}`);
     console.log(test)
     var soldTimesCost = 0
     var inventTimesCost = 0
@@ -312,8 +312,17 @@ router.get('/products', (req, res) => {
     .then(dbPostData => {
         const products = dbPostData.map(products => products.get({ plain: true }));
 
+        let loginStatus;
+
+        if (typeof req.session.passport != 'undefined') {
+            loginStatus = req.session.passport.user.id;
+        } else {
+            loginStatus = false;
+        }
+
         res.render('product-list', {
-            products
+            products, 
+            loggedIn: loginStatus
         })
     })
     .catch(err => {
