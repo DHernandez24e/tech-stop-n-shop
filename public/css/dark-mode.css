@@ -27,6 +27,7 @@
   color: white !important;
 }
 
+<<<<<<< HEAD
 [data-theme="dark"] .oi-menu {
   color: white !important;
 }
@@ -36,3 +37,35 @@
     padding-left: 0px;
   }
 }
+=======
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#fatherdayImg{
+  width: 100%;
+  height: 100%;
+}
+.prodImg {
+  width: 150px;
+  height: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+#deal {
+  background-color: red;
+}
+
+#DOTD {
+  width: 250px;
+  height: 50%;
+}
+
+body {
+  background-color:	#D3D3D3;
+}
+>>>>>>> 9a8b922f3c827f7fafba5c504fb1966aa25938ba
