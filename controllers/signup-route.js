@@ -6,9 +6,9 @@ const {
     Comment
 } = require('../models');
 
-router.get('/', (req, res) => {
-    res.render('signup');
-});
+// router.get('/', (req, res) => {
+//     res.render('signup');
+// });
 
 
 module.exports = router;

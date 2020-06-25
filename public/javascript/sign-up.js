@@ -11,8 +11,8 @@ async function editFormHandler(event) {
     console.log(email)
     console.log(password)
     // console.log(stock)
-
-    await fetch(`/api/users`, {
+    if (username && email && password) {
+    const response =    await fetch(`/api/users`, {
         method: 'POST',
         body: JSON.stringify({
           username,
@@ -23,8 +23,23 @@ async function editFormHandler(event) {
           'Content-Type': 'application/json'
         }
       });
-      console.log(" I am here")
-      document.location.replace('/');
+
+      if (response.ok) {
+        const res2 = await fetch('/api/users/login', {
+          method: 'POST',
+          body: JSON.stringify({
+              username,
+              password
+          }),
+          headers: { 'Content-Type': 'application/json' }
+      });
+      if (res2.ok) {
+        document.location.replace('/');
+    }
+  } else {
+    alert(response.statusText)
+}
+
   }
-  
+}  
   document.querySelector('#submitButton').addEventListener('click', editFormHandler);

@@ -7,6 +7,7 @@ const {
     Product_Profit
 } = require('../models');
 
+
 //GET all products
 router.get('/profit', (req, res) => {
     Category.findAll({
@@ -24,15 +25,10 @@ router.get('/profit', (req, res) => {
 
     })
   .then(dbPostData => {
-    // serialize data before passing to template
-    // const posts = dbPostData;  
-    // console.log(dbPostData);
+
     let test2 = JSON.stringify(dbPostData);
     let parsePost =JSON.parse(JSON.stringify(dbPostData));
     console.log(parsePost);
-    // let test1 = "hi";
-    // let test2 = "hey";
-    // console.log(parsePost[0].product_profits[0].num_sold);
     let test = parsePost[1].products[0].product_profits[0].num_sold;
     let lengthTest = parsePost.length;
     console.log("lengthTest is :");
@@ -40,12 +36,6 @@ router.get('/profit', (req, res) => {
     var soldTimesCost = 0
     var inventTimesCost = 0
     var soldTimesPrice = 0
-    // for (let i = 0; i < parsePost.length; i++) {
-    //     sumSold[i] = 0;
-    //     sumInvent[i] = 0;
-    //     // console.log(sumSold[i])
-    //     // console.log(sumInvent[i])
-    // }
 
     for (let i = 0; i < parsePost.length; i++) {
 
@@ -54,10 +44,7 @@ router.get('/profit', (req, res) => {
         inventTimesCost = inventTimesCost + parsePost[i].products[j].stock*parsePost[i].products[j].product_profits[0].cost;
         soldTimesPrice = soldTimesPrice + parsePost[i].products[j].product_profits[0].num_sold*parsePost[i].products[j].price;
 
-        // console.log(parsePost[i].products[j].product_profits[0].num_sold)
-        // console.log(parsePost[i].products[j].stock)
-        // console.log(sumSold[i])
-        // console.log(sumInvent[i])
+
         }
 
     }
@@ -74,30 +61,8 @@ router.get('/profit', (req, res) => {
     console.log(incomeTotal)
 
 
-    // var arraySumSold = []
-    // var arraySumInvent = []
-    // for (let i = 0; i < parsePost.length; i++) {
-    //     console.log(sumSold[i])
-    //     console.log(sumInvent[i])
-    //     arraySumSold.push(sumSold[i])
-    //     arraySumInvent.push(sumInvent[i])
-    // }
-
-    
-    // let objSumSold = []
-    // let objSumInvent = []
-    // console.log (arraySumSold)
-    // console.log(arraySumInvent)
-    // parsePost = parsePost.push(objSumSold)
-    // parsePost = parsePost.push(objSumInvent)
-
-    // parsePost['objSumSold'].push(arraySumSold)
-    // parsePost['objSumInvent'].push(arraySumInvent)
     console.log(parsePost)
 
-    // console.log("online 34", JSON.stringify(dbPostData));
-    // const hi = new dbPostData[0].product
-    // console.log(hi);
     let loginStatus;
     if (typeof req.session.passport != 'undefined') {
         loginStatus = req.session.passport.user.id;
@@ -105,8 +70,7 @@ router.get('/profit', (req, res) => {
         loginStatus = false;
     }
     res.render('profit', {parsePost, profitTotal, profitFlag, test2, loggedIn: loginStatus});
-    // const posts = "hello";
-    // res.render('profit', {posts: "hello"});
+
   })
   .catch(err => res.status(500).json(err));
 });
@@ -114,16 +78,7 @@ router.get('/profit', (req, res) => {
 router.get('/product-inventory', (req, res) => {
     Product.findAll({
         attributes: ['id', 'product_name'],
-        // include: 
-        // [
-        // {
-        //     model: Product,
-        //     attributes: ['product_name', 'price', 'stock'],
-        //     include: {
-        //         model: Product_Profit,
-        //         attributes: ['num_sold','cost']
-        //       }
-        // },
+
 
     })
   .then(dbPostData => {
@@ -135,8 +90,30 @@ router.get('/product-inventory', (req, res) => {
         loginStatus = false;
     }
     res.render('product-inventory', {parsePost,  loggedIn: loginStatus});
-    // const posts = "hello";
-    // res.render('profit', {posts: "hello"});
+
+  })
+  .catch(err => res.status(500).json(err));
+});
+
+router.get('/search', (req, res) => {
+    Product.findAll({
+        attributes: ['id', 'product_name', 'price', 'image'],
+
+
+    })
+  .then(dbPostData => {
+    console.log("I am at search get")
+    let parsePost =JSON.parse(JSON.stringify(dbPostData));
+    console.log(parsePost)
+    // console.log("search is : " + search)
+    for (let i = 0; i < parsePost.length; i++){
+
+    }
+    let val = document.getElementById("#search-id").value;
+    console.log("value is :" + val);
+
+    res.render('search', {parsePost});
+
   })
   .catch(err => res.status(500).json(err));
 });
@@ -148,10 +125,7 @@ router.get('/products-update/:id', (req, res) => {
               id: req.params.id
             }
         })  .then(dbUserData => {
-            // if (!dbUserData) {
-            //   res.status(404).json({ message: 'No user found with this id' });
-            //   return;
-            // }
+
             let loginStatus;
             if (typeof req.session.passport != 'undefined') {
                 loginStatus = req.session.passport.user.id;
@@ -178,20 +152,7 @@ router.get('/', (req, res) => {
                 'stock',
                 'image'
             ],
-            // include: [
-            //     /*{
-            //       model: Comment,
-            //       attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-            //       include: {
-            //         model: User,
-            //         attributes: ['username']
-            //       }
-            //     },*/
-            //     {
-            //         //  model: Product
-            //         // attributes: ['username']
-            //     }
-            // ]
+
         })
         .then(dbPostData => {
             const products = dbPostData.map(products => products.get({
