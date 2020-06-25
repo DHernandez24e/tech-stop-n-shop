@@ -47,8 +47,8 @@
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0 mr-2">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search By Keyword" aria-label="Search" style="width: 200px;">
-            <button class="btn btn-outline-success my-2 my-sm-0 nav-text" type="submit"><span class="oi oi-magnifying-glass"></span></button>
+            <input class="form-control mr-sm-2" type="text" id="search-field" placeholder="Search By Keyword" aria-label="Search" style="width: 200px;">
+            <button class="btn btn-outline-success my-2 my-sm-0 nav-text" id="search-btn" type="submit"><span class="oi oi-magnifying-glass"></span></button>
           </form>
             <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#cart"><span class="oi oi-cart"></span> (<span class="total-count"></span>)</button></div>
         </div>
@@ -88,7 +88,7 @@
     {{{ body }}}
     
     </main>
-    <footer class="text-center font-weight-bold p-2 mt-3">
+    <footer>
       Thanks for visiting!
     </footer>
     </div>
@@ -98,6 +98,7 @@
     <script src="/javascript/logout.js"></script>
     {{/if}}
     <script src="/javascript/homepage.js"></script>
+    <script src="/javascript/search.js"></script>
     <script src="/javascript/dark-mode-switch.js"></script>
   </body>
 </html>
