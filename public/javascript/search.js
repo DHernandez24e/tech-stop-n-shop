@@ -9,5 +9,4 @@ async function searchFormHandler(event) {
   }
 }
 
-const submit = document.querySelector('#search-btn');
-submit.addEventListener('click', searchFormHandler);
+document.querySelector('#search-btn').addEventListener('click', searchFormHandler);
