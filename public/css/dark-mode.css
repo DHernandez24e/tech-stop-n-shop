@@ -1,0 +1,71 @@
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#fatherdayImg{
+  width: 100%;
+  height: 100%;
+}
+.prodImg {
+  width: 150px;
+  height: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+#deal {
+  background-color: red;
+}
+
+#DOTD {
+  width: 250px;
+  height: 50%;
+}
+
+body {
+  background-color:	#D3D3D3;
+}
+
+[data-theme="dark"] {
+  background-color: #111 !important;
+  color: #eee;
+}
+
+[data-theme="dark"] .bg-light {
+  background-color: #111 !important;
+}
+
+[data-theme="dark"] .bg-white {
+  background-color: #000 !important;
+}
+
+[data-theme="dark"] .bg-black {
+  background-color: #eee !important;
+}
+
+[data-theme="dark"] header {
+  border-bottom: 1px solid #deb928;
+}
+
+[data-theme="dark"] .nav-text {
+  color: white !important;
+}
+
+[data-theme="dark"] .nav-text {
+  color: white !important;
+}
+
+[data-theme="dark"] .oi-menu {
+  color: white !important;
+}
+
+@media only screen and (max-width: 991px) {
+  #logout {
+    padding-left: 0px;
+  }
+}
+
