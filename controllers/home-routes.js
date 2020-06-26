@@ -38,16 +38,55 @@ router.get('/profit', isAuth, (req, res) => {
     var soldTimesCost = 0
     var inventTimesCost = 0
     var soldTimesPrice = 0
-   
+    var soldArray = []
+    var inventArray = []
+    var sum = 0
+    var objArray = []
+    var productItem
+    var soldItem
+    var inventItem
+    // const productNew = {
+    //     id: 0,
+    //     product : "hats",
+    //     num_sold : 4,
+    //     num_invent : 2
+    // }
+    // var objNew = new Object();
+    // const objNew = Object.create(productNew)
+    var objSold = {}
     for (let i = 0; i < parsePost.length; i++) {
 
         for (let j = 0; j < parsePost[i].products.length; j++) {
         soldTimesCost = soldTimesCost + parsePost[i].products[j].product_profits[0].num_sold*parsePost[i].products[j].product_profits[0].cost;
         inventTimesCost = inventTimesCost + parsePost[i].products[j].stock*parsePost[i].products[j].product_profits[0].cost;
         soldTimesPrice = soldTimesPrice + parsePost[i].products[j].product_profits[0].num_sold*parsePost[i].products[j].price;
-        }
+        // sum = sum +1
+        // soldArray[sum]=parsePost[i].products[j].product_profits[0].num_sold
+        // inventArray[sum] = parsePost[i].products[j].stock
+        productItem = parsePost[i].products[j].product_name
+        soldItem = parsePost[i].products[j].product_profits[0].num_sold
+        inventItem = parsePost[i].products[j].stock
+        sum = sum +1
+        // objNew[sum].id = sum
+        console.log("product item is :" + productItem)
+        console.log("num sold is : " + soldItem)
+        console.log("inventItem is : " + inventItem)
+
+        // var objIndex = sum
+        var objName = "obj" + sum
+        var objName = new Object();
+        objName.product = productItem
+        objName.num_sold = soldItem
+        objName.num_invent = inventItem
+        objArray.push(objName)
+        console.log("objNew is : ")
+        console.log(objName)
+      
+    }
 
     }
+    console.log("obj new is : ")
+    console.log(objArray)
 
     let debtTotal = soldTimesCost + inventTimesCost
     let incomeTotal = soldTimesPrice;
@@ -69,7 +108,7 @@ router.get('/profit', isAuth, (req, res) => {
         loginStatus = false;
     }
     console.log('WE GET HERE 4');
-    res.render('profit', {parsePost, profitTotal, profitFlag, test2, loggedIn: loginStatus});
+    res.render('profit', {parsePost, profitTotal, objArray, profitFlag, test2, loggedIn: loginStatus, soldArray, inventArray});
   })
   .catch(err => res.status(500).json(err));
 });
