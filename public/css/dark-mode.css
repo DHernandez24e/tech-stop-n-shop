@@ -51,12 +51,12 @@ body {
   border-bottom: 1px solid #deb928;
 }
 
-[data-theme="dark"] .nav-text {
+[data-theme="dark"] .dark-mode-light-text {
   color: white !important;
 }
 
-[data-theme="dark"] .nav-text {
-  color: white !important;
+[data-theme="dark"] .dark-mode-dark-text {
+  color: #111 !important;
 }
 
 [data-theme="dark"] .oi-menu {

@@ -1,22 +1,39 @@
 <h1>Searched For Products:</h1>
-  <br />
-  <div class="container">
-    <div class="row">
-      {{#each products}}
-      {{!-- {{> post-info post }} --}}
-      <div class="col">
-        <div class="card mr-md-5">
-          <div class="card-body ">
-            <p class="card-text"><h5 class="text-center">{{this.product_name}}</h5></p>
-          </div>
-          {{!-- <div class="card-body" style="background-image: url({{image}})"></div> --}}
-          <img src="{{this.image}}" class="card-img-top img-thumbnail w-75" alt="Card image">
-          <div class="card-body">
-            <p class="card-text text-center">${{price}}</p>
-          </div>
-          <a href="#" data-name="{{this.product_name}}" data-price="{{this.price}}" class="add-to-cart btn btn-primary">Add to cart</a>
+<br />
+<div class="container">
+  <div class="row">
+    <div class="container-fluid">
+    <div class="col-xs-6 col-lg-10 col-md-10">
+        <div class="row mx-auto">
+            <div class="d-flex flex-wrap justify-content-around">
+                {{#each products}}
+                <div class="p-2 dark mt-2 text-center">
+                    <img src="{{image}}" alt="Card image" class="prodImg"> <br />
+                    <h5 class="dark-mode-light-text">{{this.product_name}}</h5>
+                    <p class="dark-mode-light-text">${{this.price}}</p><br>
+                    <a href="#" data-name="{{product_name}}" data-price="{{price}}" class="add-to-cart btn btn-primary">Add to cart</a>
+                </div>
+                {{/each}}
+            </div>
         </div>
-      </div>
-      {{/each}}
+    </div>
+</div>
+  </div>
+</div>
+
+{{!-- <div class="card-deck">
+  {{#each products}}
+  <div class="card">
+    <img src="{{this.image}}" class="card-img-top img-thumbnail" alt="Card image">
+
+    <div class="card-body">
+      <h5 class="card-title text-center dark-mode-dark-text">{{this.product_name}}</h5>
+      <p class="card-text text-center dark-mode-dark-text">${{price}}</p>
+
+      <a href="#" data-name="{{this.product_name}}" data-price="{{this.price}}" class="add-to-cart btn btn-primary">Add
+        to cart</a>
+
     </div>
   </div>
+  {{/each}}
+</div> --}}
