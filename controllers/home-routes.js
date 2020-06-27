@@ -74,6 +74,8 @@ router.get('/profit', isAuth, (req, res) => {
   .catch(err => res.status(500).json(err));
 });
 
+
+//Inventory Page
 router.get('/product-inventory', isAuth, (req, res) => {
     Product.findAll({
         attributes: ['id', 'product_name'],
@@ -91,6 +93,7 @@ router.get('/product-inventory', isAuth, (req, res) => {
   .catch(err => res.status(500).json(err));
 });
 
+//Update inventory
 router.get('/products-update/:id', (req, res) => {
     Product.findOne({
         
@@ -112,6 +115,8 @@ router.get('/products-update/:id', (req, res) => {
           });
         });
 
+
+//Homepage/Featured items
 router.get('/', (req, res) => {
     Product.findAll({
         where: {
@@ -150,14 +155,18 @@ router.get('/', (req, res) => {
         });
 });
 
+
+//Update inventory page render
 router.get('/update-inventory', isAuth, (req, res) => {
     res.render('update-inventory')
    })
 
+//Checkout page render
 router.get('/checkout', (req, res) => {
     res.render('checkout');
 });
 
+//Search 
 router.get('/search/:query', (req, res) => {
     console.log("WE GET TO THE ROUTE");
     console.log("REQUEST.PARAMS", req.params);
@@ -212,6 +221,7 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 
+//Sign-up page
 router.get('/signup', (req, res) => {
     if (req.session.loggedIn) {
         res.redirect('/');
@@ -220,66 +230,59 @@ router.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-router.get('/post/:id', (req, res) => {
-    Post.findOne({
-            where: {
-                id: req.params.id
-            },
-            attributes: [
-                'id',
-                'post_url',
-                'title',
-                'created_at'
-                //,[sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
-            ],
-            include: [
-                /*{
-                  model: Comment,
-                  attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-                  include: {
-                    model: User,
-                    attributes: ['username']
-                  }
-                },*/
-                {
-                    model: User,
-                    attributes: ['username']
-                }
-            ]
-        })
-        .then(dbPostData => {
-            if (!dbPostData) {
-                res.status(404).json({
-                    message: 'No post found with this id'
-                });
-                return;
-            }
-
-            // serialize the data
-            const post = dbPostData.get({
-                plain: true
-            });
-
-            // pass data to template
-            //res.render('single-post', { post });
-            res.render('single-post', {
-                post,
-                loggedIn: req.session.loggedIn
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
-});
-
 //Products page
-router.get('/products', (req, res) => {
-    Product.findAll({
-        attributes: ['id', 'product_name', 'price', 'stock', 'image']
+// router.get('/products', (req, res) => {
+//     Product.findAll({
+//         attributes: ['id', 'product_name', 'price', 'stock', 'image', 'category_id'],
+//         include: {
+//             model: Category,
+//             attributes: ['id', 'category_name']
+//         }
+//     })
+//     .then(dbPostData => {
+//         const products = dbPostData.map(products => products.get({ plain: true }));
+
+//         console.log(products)
+
+//         let loginStatus;
+
+//         if (typeof req.session.passport != 'undefined') {
+//             loginStatus = req.session.passport.user.id;
+//         } else {
+//             loginStatus = false;
+//         }
+
+//         res.render('product-list', {
+//             products, 
+//             loggedIn: loginStatus
+//         })
+//     })
+//     .catch(err => {
+//         console.log(err);
+//         res.status(500).json(err)
+//     });
+// });
+
+//Categorize
+router.get('/products/category/:id', (req, res) => {
+    Category.findAll({
+        where: {
+            id: req.params.id
+        },
+        include: {
+            model: Product,
+            attributes: ['id', 'product_name', 'price', 'stock', 'image', 'category_id']
+        }
     })
     .then(dbPostData => {
         const products = dbPostData.map(products => products.get({ plain: true }));
+
+        console.log(products)
+        console.log('test 1')
+
+        const test = products.map(test => test.get({ plain: true }));
+
+        console.log(test)
 
         let loginStatus;
 
@@ -289,10 +292,11 @@ router.get('/products', (req, res) => {
             loginStatus = false;
         }
 
-        res.render('product-list', {
-            products, 
-            loggedIn: loginStatus
-        })
+        res.json(products)
+        // res.render('product-list', {
+        //     products, 
+        //     loggedIn: loginStatus
+        // })
     })
     .catch(err => {
         console.log(err);

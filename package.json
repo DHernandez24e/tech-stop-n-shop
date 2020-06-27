@@ -31,5 +31,8 @@
     "passport-local": "^1.0.0",
     "sequelize": "^5.21.13",
     "url-shorty": "^1.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
