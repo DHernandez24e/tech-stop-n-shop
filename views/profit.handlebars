@@ -18,3 +18,24 @@
     </h3>
   </div> 
 </div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Product Name</th>
+      <th scope="col"># Items In Inventory</th>
+      <th scope="col"># Items Sold</th>
+      {{!-- <th scope="col">Handle</th> --}}
+    </tr>
+  </thead>
+  <tbody>
+    {{#each objArray}}
+    <tr>
+      {{!-- <th scope="row">{{@index}}</th> --}}
+      <td>{{product}}</td>
+      <td>{{num_invent}}</td>
+      <td>{{num_sold}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
