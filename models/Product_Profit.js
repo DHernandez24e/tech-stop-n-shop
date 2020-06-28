@@ -3,7 +3,7 @@ const sequelize = require('../config/connection');
 
 class Product_Profit extends Model {}
 
-// create fields/columns for Post model
+// create data types for Product_Profit model
 Product_Profit.init(
     {
       id: {

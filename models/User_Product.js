@@ -3,7 +3,7 @@ const sequelize = require('../config/connection');
 
 class User_Product extends Model {}
 
-// create fields/columns for Post model
+// create data types for User_Product model
 User_Product.init(
     {
       id: {

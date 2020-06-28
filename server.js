@@ -17,6 +17,7 @@ const PORT = process.env.PORT || 3002;
 
 
 let cookieVar;
+// set up for running on heroku
 if(process.env.JAWSDB_URL) {
   cookieVar = process.env.JAWSDB_COOKIE;
 } else {

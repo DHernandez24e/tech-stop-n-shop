@@ -48,7 +48,7 @@ router.get('/profit', isAuth, (req, res) => {
     for (let i = 0; i < parsePost.length; i++) {
 
         for (let j = 0; j < parsePost[i].products.length; j++) {
-
+            // run through equations to calculate the total profit of the company
             soldTimesCost = soldTimesCost + parsePost[i].products[j].product_profits[0].num_sold*parsePost[i].products[j].product_profits[0].cost;
             inventTimesCost = inventTimesCost + parsePost[i].products[j].stock*parsePost[i].products[j].product_profits[0].cost;
             soldTimesPrice = soldTimesPrice + parsePost[i].products[j].product_profits[0].num_sold*parsePost[i].products[j].price;
@@ -56,18 +56,22 @@ router.get('/profit', isAuth, (req, res) => {
             productItem = parsePost[i].products[j].product_name
             soldItem = parsePost[i].products[j].product_profits[0].num_sold
             inventItem = parsePost[i].products[j].stock
+            costItem = parsePost[i].products[j].product_profits[0].cost
+            priceItem = parsePost[i].products[j].price
             sum = sum +1
         
             console.log("product item is :" + productItem)
             console.log("num sold is : " + soldItem)
             console.log("inventItem is : " + inventItem)
 
-        
+            // create objects to append to array to build array of product name, number sold and number in inventory
             var objName = "obj" + sum
             var objName = new Object();
             objName.product = productItem
             objName.num_sold = soldItem
             objName.num_invent = inventItem
+            objName.cost = costItem
+            objName.price = priceItem
             objArray.push(objName)
             console.log("objNew is : ")
             console.log(objName)
@@ -82,6 +86,7 @@ router.get('/profit', isAuth, (req, res) => {
     let debtTotal = soldTimesCost + inventTimesCost
     let incomeTotal = soldTimesPrice;
     let profitTotal = incomeTotal - debtTotal;
+    // set profit flag determining whether it is green for positive profit or red for negative profit
     if (profitTotal > 0){
         var profitFlag = true;
     } else {
@@ -120,6 +125,7 @@ router.get('/product-inventory', isAuth, (req, res) => {
         attributes: ['id', 'product_name'],
     })
   .then(dbPostData => {
+    // convert data string to readable json format
     let parsePost =JSON.parse(JSON.stringify(dbPostData));
     let loginStatus;
     if (typeof req.session.passport != 'undefined') {

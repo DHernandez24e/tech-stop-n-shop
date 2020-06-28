@@ -7,7 +7,7 @@ class User extends Model {
         return bcrypt.compare(loginPw, this.password)
     }
 }
-
+// create data types for User model
 User.init(
     {
         id: {
