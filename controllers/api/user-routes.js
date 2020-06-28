@@ -36,8 +36,8 @@ router.get('/:id', (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
+// use passport to authenticate login. if invalid credentials, passport will return unauthorized
 router.post('/login', passport.authenticate('local'), function(req, res) {
-    console.log('PASSPORT GOES HERE', req);
     res.render('homepage', {
       loggedIn: req.session.passport.user.id,
     });
@@ -55,6 +55,7 @@ router.post('/', (req, res) => {
     .catch(err => res.status(500).json(err));
     });
 
+// Update user table with dark mode toggle preference. Successfully updates value in table, but future implementation needed to retreive value from table and load into localstorage on login
 router.put('/dm', (req, res) => {
     if (typeof req.session.passport != 'undefined') {
         User.update({

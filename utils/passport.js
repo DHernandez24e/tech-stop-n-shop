@@ -4,6 +4,7 @@ const { User } = require('../models');
 
 // documentation: http://www.passportjs.org/docs/username-password/
 passport.use(new LocalStrategy(
+  // using code block from documentation would not await await resolved promise object, transitioning code to async await solved issue
   async function(username, password, done) {
     let dbUser = await User.findOne({
       where: {
@@ -11,6 +12,7 @@ passport.use(new LocalStrategy(
       }
     });
 
+    // only run check password if user exists
     let result;
     if (dbUser != null) {
       result = await dbUser.checkPassword(password);
@@ -27,6 +29,7 @@ passport.use(new LocalStrategy(
   }
 ));
 
+// good writeup of serialize and deserializing passport user https://stackoverflow.com/questions/27637609/understanding-passport-serialize-deserialize
 passport.serializeUser((user, cb) => {
   cb(null, user);
 });

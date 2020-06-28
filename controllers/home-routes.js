@@ -211,10 +211,9 @@ router.get('/checkout', (req, res) => {
 
 //Search 
 router.get('/search/:query', (req, res) => {
-    console.log("WE GET TO THE ROUTE");
-    console.log("REQUEST.PARAMS", req.params);
     Product.findAll({
         attributes: ['id', 'product_name', 'price', 'stock', 'image', 'category_id'],
+        // Use Sequelize like operator. More operators here: https://sequelize.org/master/manual/model-querying-basics.html
         where: {
             product_name: {
                 [Op.like]: '%' + req.params.query + '%'
@@ -237,16 +236,13 @@ router.get('/search/:query', (req, res) => {
                 plain: true
             }));
 
+            // make sure to pass in correct login status. If no passport object exists, it has not been created, i.e. user not logged in
             let loginStatus;
             if (typeof req.session.passport != 'undefined') {
                 loginStatus = req.session.passport.user.id;
             } else {
                 loginStatus = false;
             }
-
-            console.log('PRODUCTS', products);
-            console.log('===========')
-            console.log('LOGGED IN?', loginStatus);
 
             res.render('search', {
                 products: products,

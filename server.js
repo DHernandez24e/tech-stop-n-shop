@@ -40,6 +40,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session(sess));
+// initialize passport, use passport session
 app.use(passport.initialize());
 app.use(passport.session());
 

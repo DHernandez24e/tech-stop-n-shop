@@ -1,5 +1,5 @@
+// used to ensure user is logged in
 const isAuth = (req, res, next) => {
-  // if (!req.session.user_id)
   if (req.user) {
     return next();
   }

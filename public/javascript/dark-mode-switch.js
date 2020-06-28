@@ -1,3 +1,4 @@
+// dark mode function used via MIT license https://coliff.github.io/dark-mode-switch/
 (function() {
   var darkSwitch = document.getElementById("darkSwitch");
   if (darkSwitch) {
@@ -28,9 +29,6 @@
             'Content-Type': 'application/json'
           }
         })
-        // .then(res => {
-        //   console.log(res);
-        // })
       } else {
         document.body.removeAttribute("data-theme");
         localStorage.removeItem("darkSwitch");
@@ -44,9 +42,6 @@
             'Content-Type': 'application/json'
           }
         })
-        // .then(res => {
-        //   console.log(res);
-        // })
       }
     }
   }

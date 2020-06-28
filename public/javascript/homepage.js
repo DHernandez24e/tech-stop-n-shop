@@ -207,6 +207,7 @@ var shoppingCart = (function() {
   
   displayCart();
   
+// listen for click of checkout button, as long as cart contains items
 async function checkout() {
   if (sessionStorage.shoppingCart != null) {
     document.location.replace('/checkout');
