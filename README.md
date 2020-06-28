@@ -5,7 +5,7 @@
   ![Github License](https://img.shields.io/badge/license-MIT-brightgreen)
 
   ## Description
-  An e-commerce website for tech items for users to browse and purchase. Manager's of the site can also update inventory and items sold, which reflects profit for the Tech Stop-N-Shop company. Built with Sequelize for the models, Handlebars.js for the views, and Express.js for the controllers. Application uses Passport.js for user authentication, bcrypt for password hashing, and a front-end dark mode switch for UX.
+  An e-commerce website for tech items for users to browse and purchase. Manager's of the site can also update inventory and items sold, which reflects profit for the Tech Stop-N-Shop company. Using the [Node.js](https://nodejs.org/en/) runtime environment, this was built with [Sequelize](https://sequelize.org/) for the models, [Handlebars.js](https://handlebarsjs.com/) for the views, and [Express.js](https://expressjs.com/) for the controllers. Application uses [Passport.js](http://www.passportjs.org/) for user authentication, [bcrypt](https://www.npmjs.com/package/bcrypt) for password hashing, and a [front-end dark mode switch](https://github.com/coliff/dark-mode-switch) for UX.
 
   ## Table of Contents
   * [Installation](#installation)
@@ -23,7 +23,12 @@
   
   ## Usage
 
-  Local users will have to also create a .env file and input necessary credentials for application to run. Otherwise visit our deployment [here](https://aqueous-island-09058.herokuapp.com/)
+  Local users will have to also create a .env file and input necessary credentials for application to run. After installation, run the below two commands to create SQL database and seed with sample products, respectively. 
+      
+    npm start
+    npm run seed
+
+  Otherwise, visit our deployment [here](https://aqueous-island-09058.herokuapp.com/)
 
   ## License
 

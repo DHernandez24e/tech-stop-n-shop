@@ -4,6 +4,7 @@ async function searchFormHandler(event) {
   console.log("SEARCHING");
   const query = document.querySelector('#search-field').value.trim();
 
+  // if user has entered a search query, use that to call search route
   if (query) {
     document.location.replace(`/search/${query}`);
   }
