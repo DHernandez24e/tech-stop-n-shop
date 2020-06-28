@@ -14,8 +14,7 @@ const isAuth = require('../utils/middleware/isAuth');
 router.get('/profit', isAuth, (req, res) => {
     Category.findAll({
         attributes: ['id', 'category_name'],
-        include: 
-        // [
+        include:
         {
             model: Product,
             attributes: ['product_name', 'price', 'stock'],
@@ -24,7 +23,6 @@ router.get('/profit', isAuth, (req, res) => {
                 attributes: ['num_sold','cost']
               }
         },
-
     })
   .then(dbPostData => {
     let test2 = JSON.stringify(dbPostData);
@@ -38,16 +36,48 @@ router.get('/profit', isAuth, (req, res) => {
     var soldTimesCost = 0
     var inventTimesCost = 0
     var soldTimesPrice = 0
-   
+    var soldArray = []
+    var inventArray = []
+    var sum = 0
+    var objArray = []
+    var productItem
+    var soldItem
+    var inventItem
+    var objSold = {}
+
     for (let i = 0; i < parsePost.length; i++) {
 
         for (let j = 0; j < parsePost[i].products.length; j++) {
-        soldTimesCost = soldTimesCost + parsePost[i].products[j].product_profits[0].num_sold*parsePost[i].products[j].product_profits[0].cost;
-        inventTimesCost = inventTimesCost + parsePost[i].products[j].stock*parsePost[i].products[j].product_profits[0].cost;
-        soldTimesPrice = soldTimesPrice + parsePost[i].products[j].product_profits[0].num_sold*parsePost[i].products[j].price;
+
+            soldTimesCost = soldTimesCost + parsePost[i].products[j].product_profits[0].num_sold*parsePost[i].products[j].product_profits[0].cost;
+            inventTimesCost = inventTimesCost + parsePost[i].products[j].stock*parsePost[i].products[j].product_profits[0].cost;
+            soldTimesPrice = soldTimesPrice + parsePost[i].products[j].product_profits[0].num_sold*parsePost[i].products[j].price;
+
+            productItem = parsePost[i].products[j].product_name
+            soldItem = parsePost[i].products[j].product_profits[0].num_sold
+            inventItem = parsePost[i].products[j].stock
+            sum = sum +1
+        
+            console.log("product item is :" + productItem)
+            console.log("num sold is : " + soldItem)
+            console.log("inventItem is : " + inventItem)
+
+        
+            var objName = "obj" + sum
+            var objName = new Object();
+            objName.product = productItem
+            objName.num_sold = soldItem
+            objName.num_invent = inventItem
+            objArray.push(objName)
+            console.log("objNew is : ")
+            console.log(objName)
+      
         }
 
     }
+
+    console.log("obj new is : ")
+    console.log(objArray)
 
     let debtTotal = soldTimesCost + inventTimesCost
     let incomeTotal = soldTimesPrice;
@@ -59,7 +89,6 @@ router.get('/profit', isAuth, (req, res) => {
     }
     console.log(debtTotal)
     console.log(incomeTotal)
-
     console.log(parsePost)
 
     let loginStatus;
@@ -68,8 +97,18 @@ router.get('/profit', isAuth, (req, res) => {
     } else {
         loginStatus = false;
     }
+
     console.log('WE GET HERE 4');
-    res.render('profit', {parsePost, profitTotal, profitFlag, test2, loggedIn: loginStatus});
+    res.render('profit', {
+        parsePost, 
+        profitTotal, 
+        objArray, 
+        profitFlag, 
+        test2, 
+        loggedIn: loginStatus, 
+        soldArray, 
+        inventArray
+    });
   })
   .catch(err => res.status(500).json(err));
 });
@@ -134,8 +173,6 @@ router.get('/', (req, res) => {
             const products = dbPostData.map(products => products.get({
                 plain: true
             }));
-            // pass a single post object into the homepage template
-            //res.render('homepage', { posts });
             
             let loginStatus;
             if (typeof req.session.passport != 'undefined') {
@@ -213,6 +250,8 @@ router.get('/search/:query', (req, res) => {
         .catch(err => res.status(500).json(err));
 });
 
+
+//Login route/render
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
         res.redirect('/');
@@ -231,58 +270,18 @@ router.get('/signup', (req, res) => {
 });
 
 //Products page
-// router.get('/products', (req, res) => {
-//     Product.findAll({
-//         attributes: ['id', 'product_name', 'price', 'stock', 'image', 'category_id'],
-//         include: {
-//             model: Category,
-//             attributes: ['id', 'category_name']
-//         }
-//     })
-//     .then(dbPostData => {
-//         const products = dbPostData.map(products => products.get({ plain: true }));
-
-//         console.log(products)
-
-//         let loginStatus;
-
-//         if (typeof req.session.passport != 'undefined') {
-//             loginStatus = req.session.passport.user.id;
-//         } else {
-//             loginStatus = false;
-//         }
-
-//         res.render('product-list', {
-//             products, 
-//             loggedIn: loginStatus
-//         })
-//     })
-//     .catch(err => {
-//         console.log(err);
-//         res.status(500).json(err)
-//     });
-// });
-
-//Categorize
-router.get('/products/category/:id', (req, res) => {
-    Category.findAll({
-        where: {
-            id: req.params.id
-        },
+router.get('/products', (req, res) => {
+    Product.findAll({
+        attributes: ['id', 'product_name', 'price', 'stock', 'image', 'category_id'],
         include: {
-            model: Product,
-            attributes: ['id', 'product_name', 'price', 'stock', 'image', 'category_id']
+            model: Category,
+            attributes: ['id', 'category_name']
         }
     })
     .then(dbPostData => {
         const products = dbPostData.map(products => products.get({ plain: true }));
 
         console.log(products)
-        console.log('test 1')
-
-        const test = products.map(test => test.get({ plain: true }));
-
-        console.log(test)
 
         let loginStatus;
 
@@ -292,11 +291,10 @@ router.get('/products/category/:id', (req, res) => {
             loginStatus = false;
         }
 
-        res.json(products)
-        // res.render('product-list', {
-        //     products, 
-        //     loggedIn: loginStatus
-        // })
+        res.render('product-list', {
+            products, 
+            loggedIn: loginStatus
+        })
     })
     .catch(err => {
         console.log(err);

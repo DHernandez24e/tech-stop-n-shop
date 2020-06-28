@@ -15,7 +15,7 @@
     <div class="wrapper">
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand nav-text" href="/">Tech Stop-N-Shop</a>
+        <a class="navbar-brand dark-mode-light-text" href="/">Tech Stop-N-Shop</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="oi oi-menu"></span>
         </button>
@@ -23,21 +23,21 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link nav-text" href="/products">Products</a>
+              <a class="nav-link dark-mode-light-text" href="/products">Products</a>
             </li>
             {{#if loggedIn}}
             <li class="nav-item active">
-              <button id="logout" class="btn nav-text">Logout</button>
+              <button id="logout" class="btn dark-mode-light-text">Logout</button>
             </li>
             <li class="nav-item active">
-              <a class="nav-link nav-text" href="/profit">Profit Page</a>
+              <a class="nav-link dark-mode-light-text" href="/profit">Profit Page</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link nav-text" href="/product-inventory">Product Inventory</a>
+              <a class="nav-link dark-mode-light-text" href="/product-inventory">Product Inventory</a>
             </li> 
             {{else}}
             <li class="nav-item active">
-              <a class="nav-link nav-text" href="/login" id="login">Login</a>
+              <a class="nav-link dark-mode-light-text" href="/login" id="login">Login</a>
             </li>
             {{/if}}
             {{!-- MIT licensed code for dark mode https://github.com/coliff/dark-mode-switch --}}
@@ -48,13 +48,13 @@
           </ul>
           <form class="form-inline my-2 my-lg-0 mr-2">
             <input class="form-control mr-sm-2" type="text" id="search-field" placeholder="Search By Keyword" aria-label="Search" style="width: 200px;">
-            <button class="btn btn-outline-success my-2 my-sm-0 nav-text" id="search-btn" type="submit"><span class="oi oi-magnifying-glass"></span></button>
+            <button class="btn btn-outline-success my-2 my-sm-0 dark-mode-light-text" id="search-btn" type="submit"><span class="oi oi-magnifying-glass"></span></button>
           </form>
             <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#cart"><span class="oi oi-cart"></span> (<span class="total-count"></span>)</button></div>
         </div>
       </nav>
     </header>
-    <main class="m-3">
+    <main class="mt-5">
       <!-- Modal -->
       <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
