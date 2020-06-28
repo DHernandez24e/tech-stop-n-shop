@@ -16,7 +16,7 @@ async function editFormHandler(event) {
           'Content-Type': 'application/json'
         }
       });
-      document.location.replace('/');
+      document.location.replace('/product-inventory');
   }
   
   document.querySelector('#inventory-submit').addEventListener('click', editFormHandler);
@@ -39,7 +39,7 @@ async function editFormHandler2(event) {
           'Content-Type': 'application/json'
         }
       });
-      document.location.replace('/');
+      document.location.replace('/product-inventory');
   }
   
   document.querySelector('#sold-submit').addEventListener('click', editFormHandler2);
