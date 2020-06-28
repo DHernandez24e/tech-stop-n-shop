@@ -3,6 +3,7 @@ const sequelize = require('../config/connection');
 
 class Product extends Model {}
 
+// create data types for Product model
 Product.init(
     {
         id: {

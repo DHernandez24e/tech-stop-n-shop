@@ -22,7 +22,9 @@
 <table class="table">
   <thead>
     <tr>
-      <th class="dark-mode-light-text" scope="col">Product Name</th>
+      <th class="dark-mode-light-text" scope="col">Product Name </th>
+      <th class="dark-mode-light-text" scope="col">Product Cost ($)</th>
+      <th class="dark-mode-light-text" scope="col">Product Price ($)</th>
       <th class="dark-mode-light-text" scope="col"># Items In Inventory</th>
       <th class="dark-mode-light-text" scope="col"># Items Sold</th>
       {{!-- <th scope="col">Handle</th> --}}
@@ -33,6 +35,8 @@
     <tr>
       {{!-- <th scope="row">{{@index}}</th> --}}
       <td class="dark-mode-light-text">{{product}}</td>
+      <td class="dark-mode-light-text">{{cost}}</td>
+      <td class="dark-mode-light-text">{{price}}</td>
       <td class="dark-mode-light-text">{{num_invent}}</td>
       <td class="dark-mode-light-text">{{num_sold}}</td>
     </tr>
