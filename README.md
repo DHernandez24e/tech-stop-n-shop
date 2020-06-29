@@ -42,7 +42,7 @@
   * [Joshua Hartshorn](https://github.com/Pops08)
   * [Aaron Lisker](https://github.com/aelisker)
   * [Diego Hernandez](https://github.com/dhernandez24e)
-https://github.com/dhernandez24e
+
   ## Tests
 
   To run tests, run the following command
